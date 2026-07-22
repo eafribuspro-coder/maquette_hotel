@@ -12,6 +12,7 @@ import restaurantPlage2 from './photos/restaurant-plage-2.svg'
 import piscine1 from './photos/piscine-1.svg'
 import piscine2 from './photos/piscine-2.svg'
 import facade from './photos/facade.svg'
+import jeuxEnfants from './photos/jeux-enfants.svg'
 
 export const photos = {
   /** Restaurant de plage, cocotiers aux troncs orange, vue rapprochée */
@@ -24,6 +25,8 @@ export const photos = {
   piscine2,
   /** Façade rose du bâtiment principal, allée et filaos */
   facade,
+  /** Aire de jeux aquatique enfants avec toboggans */
+  jeuxEnfants,
 } as const
 
 export type PhotoKey = keyof typeof photos
