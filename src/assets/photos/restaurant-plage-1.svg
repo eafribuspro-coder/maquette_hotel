@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 850" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="ciel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#dfe7ea"/><stop offset="1" stop-color="#c9d6d8"/>
+    </linearGradient>
+    <linearGradient id="sable" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d4ad7c"/><stop offset="1" stop-color="#e3c9a0"/>
+    </linearGradient>
+    <linearGradient id="toit" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c96f3b"/><stop offset="1" stop-color="#a85527"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="850" fill="url(#ciel)"/>
+  <!-- toit du restaurant -->
+  <polygon points="0,180 640,60 1280,150 1280,260 0,300" fill="url(#toit)"/>
+  <!-- ombre sous la paillote -->
+  <rect x="0" y="260" width="1280" height="260" fill="#5c554f"/>
+  <rect x="0" y="260" width="1280" height="260" fill="#3d3833" opacity="0.55"/>
+  <!-- piliers gris -->
+  <g fill="#8d938f">
+    <rect x="90" y="230" width="46" height="300"/>
+    <rect x="360" y="240" width="46" height="290"/>
+    <rect x="630" y="245" width="46" height="285"/>
+    <rect x="900" y="250" width="46" height="280"/>
+    <rect x="1160" y="255" width="46" height="275"/>
+  </g>
+  <!-- tables et chaises suggérées -->
+  <g fill="#23201d" opacity="0.8">
+    <rect x="170" y="430" width="150" height="14"/>
+    <rect x="180" y="444" width="10" height="60"/><rect x="300" y="444" width="10" height="60"/>
+    <rect x="450" y="440" width="140" height="14"/>
+    <rect x="460" y="454" width="10" height="55"/><rect x="570" y="454" width="10" height="55"/>
+    <rect x="720" y="445" width="140" height="14"/>
+    <rect x="980" y="450" width="130" height="14"/>
+  </g>
+  <!-- sable -->
+  <rect x="0" y="520" width="1280" height="330" fill="url(#sable)"/>
+  <!-- troncs de cocotiers peints en orange -->
+  <g>
+    <path d="M540 0 L575 0 L565 850 L520 850 Z" fill="#e07b39"/>
+    <path d="M540 0 L575 0 L565 850 L520 850 Z" fill="#c96f3b" opacity="0.35"/>
+    <path d="M920 0 L950 0 L945 620 L905 620 Z" fill="#e07b39"/>
+    <path d="M1150 40 L1178 40 L1175 560 L1140 560 Z" fill="#e07b39"/>
+  </g>
+  <!-- palmes -->
+  <g fill="#3f5c3a">
+    <ellipse cx="560" cy="-10" rx="260" ry="70" transform="rotate(-12 560 -10)"/>
+    <ellipse cx="935" cy="20" rx="220" ry="60" transform="rotate(9 935 20)"/>
+    <ellipse cx="1165" cy="45" rx="200" ry="55" transform="rotate(-7 1165 45)"/>
+  </g>
+</svg>

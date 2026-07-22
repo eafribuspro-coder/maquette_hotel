@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@theme {
+  /* Palette tirée des photos de l'hôtel */
+  --color-corail-50: #fdf3f1;
+  --color-corail-100: #fbe4e0;
+  --color-corail-200: #f5c6bf;
+  --color-corail-300: #efa8a0;
+  --color-corail-400: #e8968c;
+  --color-corail-500: #de7a6e;
+  --color-corail-600: #c95f52;
+  --color-corail-700: #a84a3f;
+
+  --color-terracotta-400: #e07b39;
+  --color-terracotta-500: #c96f3b;
+  --color-terracotta-600: #a85527;
+
+  --color-lagune-100: #d9f0f2;
+  --color-lagune-300: #7cc9d1;
+  --color-lagune-500: #2e9ba6;
+  --color-lagune-600: #1e7480;
+  --color-lagune-700: #175a64;
+
+  --color-sable-100: #faf6ef;
+  --color-sable-200: #f2e8d8;
+  --color-sable-300: #e3c9a0;
+  --color-sable-400: #d4ad7c;
+
+  --color-encre-500: #4a3f38;
+  --color-encre-700: #332b26;
+  --color-encre-900: #211b17;
+
+  --font-display: "Playfair Display", "Georgia", serif;
+  --font-body: "Inter", "Helvetica Neue", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-encre-700);
+  background-color: var(--color-sable-100);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+}
