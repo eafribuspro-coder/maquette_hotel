@@ -21,8 +21,8 @@ export default function Contact() {
   return (
     <>
       <Seo
-        title="Contact & Réservation — Nourable Hotel"
-        description="Réservez votre séjour au Nourable Hotel en Côte d'Ivoire : formulaire de réservation, téléphone, e-mail et plan d'accès. Réception ouverte 24h/24."
+        title="Contact & Réservation — Nourabel Hotel"
+        description="Réservez votre séjour au Nourabel Hotel en Côte d'Ivoire : formulaire de réservation, téléphone, e-mail et plan d'accès. Réception ouverte 24h/24."
       />
       <PageHero
         image={photos.facade}
@@ -122,8 +122,8 @@ export default function Contact() {
                   </li>
                   <li className="flex gap-3">
                     <Mail className="mt-0.5 h-5 w-5 shrink-0 text-corail-300" />
-                    <a href="mailto:contact@nourablehotel.ci" className="text-sable-200/85 hover:text-white">
-                      contact@nourablehotel.ci
+                    <a href="mailto:contact@nourabelhotel.ci" className="text-sable-200/85 hover:text-white">
+                      contact@nourabelhotel.ci
                     </a>
                   </li>
                   <li className="flex gap-3">
@@ -136,7 +136,7 @@ export default function Contact() {
               {/* Carte Google Maps (Abidjan / littoral) */}
               <div className="mt-8 overflow-hidden rounded-2xl shadow-lg">
                 <iframe
-                  title="Plan d'accès au Nourable Hotel"
+                  title="Plan d'accès au Nourabel Hotel"
                   src="https://www.google.com/maps?q=Jacqueville,+C%C3%B4te+d'Ivoire&z=11&output=embed"
                   className="h-72 w-full border-0"
                   loading="lazy"

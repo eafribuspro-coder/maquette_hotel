@@ -35,7 +35,7 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Marque */}
           <div>
-            <p className="font-display text-2xl font-bold tracking-widest text-white">NOURABLE</p>
+            <p className="font-display text-2xl font-bold tracking-widest text-white">NOURABEL</p>
             <p className="mt-1 text-xs uppercase tracking-[0.3em] text-or-300">
               Hôtel · Resort · Plage
             </p>
@@ -92,8 +92,8 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="mailto:contact@nourablehotel.ci" className="hover:text-corail-300">
-                  contact@nourablehotel.ci
+                <a href="mailto:contact@nourabelhotel.ci" className="hover:text-corail-300">
+                  contact@nourabelhotel.ci
                 </a>
               </li>
             </ul>
@@ -117,7 +117,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs text-sable-200/60 sm:flex-row">
-          <p>© 2026 Nourable Hotel. Tous droits réservés.</p>
+          <p>© 2026 Nourabel Hotel. Tous droits réservés.</p>
           <div className="flex gap-6">
             <a href="#" className="hover:text-corail-300">
               Mentions légales

@@ -17,8 +17,8 @@ export default function Loisirs() {
   return (
     <>
       <Seo
-        title="Piscines & Loisirs — Nourable Hotel"
-        description="Grande piscine avec transats et parasols, aire de jeux aquatique avec toboggans pour enfants et plage privée de 200 mètres au Nourable Hotel."
+        title="Piscines & Loisirs — Nourabel Hotel"
+        description="Grande piscine avec transats et parasols, aire de jeux aquatique avec toboggans pour enfants et plage privée de 200 mètres au Nourabel Hotel."
       />
       <PageHero
         image={photos.piscine2}
@@ -51,7 +51,7 @@ export default function Loisirs() {
                 transats, parasols et service au bord de l'eau : commandez un jus de gingembre
                 frais ou un cocktail au bissap sans quitter votre serviette. Le carrelage aux
                 tons profonds donne à l'eau cette couleur de lagune qui fait la signature du
-                Nourable.
+                Nourabel.
               </p>
               <ul className="mt-7 space-y-2 text-sm text-encre-700">
                 <li>• Bassin de 25 m, profondeur 1,20 m à 2 m</li>

@@ -35,8 +35,8 @@ export default function Restaurant() {
   return (
     <>
       <Seo
-        title="Restaurant & Bar — Nourable Hotel"
-        description="Restaurant en paillote face à la mer au Nourable Hotel : cuisine ivoirienne et internationale, fruits de mer grillés, bar de plage sous les cocotiers."
+        title="Restaurant & Bar — Nourabel Hotel"
+        description="Restaurant en paillote face à la mer au Nourabel Hotel : cuisine ivoirienne et internationale, fruits de mer grillés, bar de plage sous les cocotiers."
       />
       <PageHero
         image={photos.restaurantPlage1}

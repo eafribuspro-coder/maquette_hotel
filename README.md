@@ -1,6 +1,6 @@
-# Nourable Hotel — Maquette de site vitrine
+# Nourabel Hotel — Maquette de site vitrine
 
-Maquette de site vitrine pour **NOURABLE HOTEL**, hôtel-resort en bord de plage en
+Maquette de site vitrine pour **NOURABEL HOTEL**, hôtel-resort en bord de plage en
 Côte d'Ivoire. Design élégant inspiré des sites hôteliers haut de gamme : grandes
 images plein écran, typographie Playfair Display / Inter, palette corail,
 terracotta, turquoise et sable tirée des photos de l'hôtel.
