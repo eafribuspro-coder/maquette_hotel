@@ -44,8 +44,8 @@ const apercuGalerie = [
   { image: photos.facade, alt: 'Façade rose du bâtiment principal' },
   { image: photos.jeuxEnfants, alt: 'Aire de jeux aquatique pour enfants' },
   { image: photos.piscine2, alt: 'Bassin en longueur au petit matin' },
-  { image: photos.restaurantPlage2, alt: 'Galerie du restaurant face à la mer' },
-  { image: photos.piscine1, alt: 'Reflets turquoise de la piscine' },
+  { image: photos.restaurantPlage2, alt: 'La paillote du restaurant face à la mer' },
+  { image: photos.piscine3, alt: 'La piscine vue depuis la plage carrelée' },
   { image: photos.facade, alt: "Allée d'entrée sous les filaos" },
 ]
 

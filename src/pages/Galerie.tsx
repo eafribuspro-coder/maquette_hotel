@@ -12,7 +12,7 @@ const items = [
   { image: photos.facade, legende: 'La façade corail du bâtiment principal' },
   { image: photos.jeuxEnfants, legende: "L'aire de jeux aquatique des enfants" },
   { image: photos.piscine2, legende: 'Le bassin en longueur au petit matin' },
-  { image: photos.restaurantPlage2, legende: 'La paillote du restaurant face à la mer' },
+  { image: photos.piscine3, legende: 'La piscine vue depuis la plage carrelée' },
 ]
 
 export default function Galerie() {
