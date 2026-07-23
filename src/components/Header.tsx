@@ -41,7 +41,7 @@ export default function Header() {
               solid ? 'text-encre-900' : 'text-white'
             }`}
           >
-            NOURABLE
+            NOURABEL
           </span>
           <span
             className={`hidden text-xs font-medium uppercase tracking-[0.3em] sm:inline ${
