@@ -49,7 +49,7 @@ export default function Restaurant() {
       <section className="bg-sable-100 py-24 sm:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-            <Reveal>
+            <Reveal direction="left">
               <img
                 src={photos.restaurantPlage2}
                 alt="Longue galerie du restaurant en paillote ouverte sur la plage"
@@ -57,7 +57,7 @@ export default function Restaurant() {
                 className="aspect-[4/3] w-full rounded-2xl object-cover shadow-2xl"
               />
             </Reveal>
-            <Reveal delay={150}>
+            <Reveal delay={150} direction="right">
               <SectionTitle
                 align="left"
                 surtitle="Notre philosophie"

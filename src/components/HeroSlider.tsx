@@ -29,7 +29,7 @@ export default function HeroSlider() {
           src={slide.image}
           alt={slide.alt}
           className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[1500ms] ease-in-out ${
-            i === current ? 'opacity-100' : 'opacity-0'
+            i === current ? 'animate-kenburns opacity-100' : 'opacity-0'
           }`}
         />
       ))}
@@ -45,8 +45,8 @@ export default function HeroSlider() {
             type="button"
             aria-label={`Aller à la photo ${i + 1}`}
             onClick={() => setCurrent(i)}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              i === current ? 'w-8 bg-white' : 'w-2 bg-white/50 hover:bg-white/80'
+            className={`h-[3px] rounded-full transition-all duration-500 ${
+              i === current ? 'w-12 bg-or-300' : 'w-6 bg-white/40 hover:bg-white/80'
             }`}
           />
         ))}

@@ -30,6 +30,11 @@
   --color-encre-700: #332b26;
   --color-encre-900: #211b17;
 
+  /* Accent doré premium */
+  --color-or-300: #dcc294;
+  --color-or-400: #c8a96a;
+  --color-or-500: #b3924f;
+
   --font-display: "Playfair Display", "Georgia", serif;
   --font-body: "Inter", "Helvetica Neue", sans-serif;
 }
@@ -47,4 +52,82 @@ body {
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
+}
+
+::selection {
+  background-color: var(--color-corail-300);
+  color: var(--color-encre-900);
+}
+
+/* --- Animations premium --- */
+
+/* Lent zoom "Ken Burns" des slides du hero */
+@keyframes kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+.animate-kenburns {
+  animation: kenburns 7s ease-out forwards;
+}
+
+/* Entrée du texte du hero au chargement */
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-hero-rise {
+  opacity: 0;
+  animation: hero-rise 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Fondu doux au changement de page */
+@keyframes page-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-page-fade {
+  animation: page-fade 0.5s ease-out;
+}
+
+/* Trait qui s'étire (ornements de titres) */
+@keyframes line-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.animate-line-grow {
+  transform-origin: left;
+  animation: line-grow 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
+/* Fil vertical du hero qui invite au scroll */
+@keyframes scroll-cue {
+  0% { transform: scaleY(0); transform-origin: top; }
+  45% { transform: scaleY(1); transform-origin: top; }
+  55% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+.animate-scroll-cue {
+  animation: scroll-cue 2.2s ease-in-out infinite;
+}
+
+/* Souligné animé des liens de navigation */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 1px;
+  width: 100%;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link-underline:hover::after,
+.link-underline[aria-current="page"]::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }

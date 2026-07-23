@@ -31,7 +31,7 @@ export default function Loisirs() {
       <section className="bg-sable-100 py-24 sm:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-            <Reveal>
+            <Reveal direction="left">
               <img
                 src={photos.piscine1}
                 alt="Grande piscine bordée de transats blancs, parasols et pavillon rose"
@@ -39,7 +39,7 @@ export default function Loisirs() {
                 className="aspect-[4/3] w-full rounded-2xl object-cover shadow-2xl"
               />
             </Reveal>
-            <Reveal delay={150}>
+            <Reveal delay={150} direction="right">
               <p className="text-xs font-semibold uppercase tracking-[0.35em] text-lagune-600">
                 Piscine adultes
               </p>
@@ -67,7 +67,7 @@ export default function Loisirs() {
       <section className="bg-lagune-100 py-24 sm:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-            <Reveal className="lg:order-2">
+            <Reveal direction="right" className="lg:order-2">
               <img
                 src={photos.jeuxEnfants}
                 alt="Structure de jeux aquatiques avec toboggans jaune et turquoise pour enfants"
@@ -75,7 +75,7 @@ export default function Loisirs() {
                 className="aspect-[4/3] w-full rounded-2xl object-cover shadow-2xl"
               />
             </Reveal>
-            <Reveal delay={150} className="lg:order-1">
+            <Reveal delay={150} direction="left" className="lg:order-1">
               <p className="text-xs font-semibold uppercase tracking-[0.35em] text-corail-500">
                 Espace enfants
               </p>
