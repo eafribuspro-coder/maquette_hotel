@@ -43,14 +43,14 @@ export default function Galerie() {
   return (
     <>
       <Seo
-        title="Galerie photos — Nourable Hotel"
-        description="Découvrez le Nourable Hotel en images : piscines turquoise, restaurant de plage, façade corail, aire de jeux aquatique et plage privée."
+        title="Galerie photos — Nourabel Hotel"
+        description="Découvrez le Nourabel Hotel en images : piscines turquoise, restaurant de plage, façade corail, aire de jeux aquatique et plage privée."
       />
       <PageHero
         image={photos.restaurantPlage2}
         surtitle="En images"
         title="Galerie"
-        subtitle="Plongez dans l'univers du Nourable, entre corail, terracotta et turquoise."
+        subtitle="Plongez dans l'univers du Nourabel, entre corail, terracotta et turquoise."
       />
 
       <section className="bg-sable-100 py-24 sm:py-28">

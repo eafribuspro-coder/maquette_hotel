@@ -53,7 +53,7 @@ export default function Accueil() {
   return (
     <>
       <Seo
-        title="Nourable Hotel — Resort en bord de plage, Côte d'Ivoire"
+        title="Nourabel Hotel — Resort en bord de plage, Côte d'Ivoire"
         description="Hôtel-resort les pieds dans le sable en Côte d'Ivoire : chambres au charme corail, restaurant de plage, piscines turquoise et plage privée."
       />
 
@@ -73,7 +73,7 @@ export default function Accueil() {
             className="animate-hero-rise font-display text-5xl font-bold tracking-[0.08em] text-white sm:text-7xl lg:text-8xl"
             style={{ animationDelay: '0.45s' }}
           >
-            NOURABLE HOTEL
+            NOURABEL HOTEL
           </h1>
           <p
             className="animate-hero-rise mt-7 font-display text-xl italic text-white/90 sm:text-2xl"
@@ -101,13 +101,13 @@ export default function Accueil() {
                 <span className="h-px w-12 bg-or-400/70" aria-hidden="true" />
               </p>
               <h2 className="mt-4 text-3xl font-bold uppercase tracking-wide text-encre-900 sm:text-4xl">
-                Découvrez l'hôtel Nourable
+                Découvrez l'hôtel Nourabel
               </h2>
               <p className="mt-2 font-display text-lg italic text-lagune-600">
                 Un havre de paix entre plage et cocotiers
               </p>
               <p className="mt-6 leading-relaxed text-encre-500">
-                Sur le littoral ivoirien, le Nourable Hotel conjugue l'élégance d'une architecture
+                Sur le littoral ivoirien, le Nourabel Hotel conjugue l'élégance d'une architecture
                 aux teintes corail et terracotta avec la douceur d'une plage bordée de cocotiers.
                 Chambres paisibles ouvertes sur les jardins, restaurant en paillote face à
                 l'océan, piscines turquoise et aire de jeux pour les enfants : tout est réuni pour
@@ -127,7 +127,7 @@ export default function Accueil() {
                 <div className="absolute -bottom-5 -right-5 h-full w-full rounded-2xl border border-or-400/50" aria-hidden="true" />
                 <img
                   src={photos.facade}
-                  alt="Bâtiment principal rose corail du Nourable Hotel et son allée de filaos"
+                  alt="Bâtiment principal rose corail du Nourabel Hotel et son allée de filaos"
                   loading="lazy"
                   className="relative aspect-[4/3] w-full rounded-2xl object-cover shadow-2xl"
                 />
@@ -166,7 +166,7 @@ export default function Accueil() {
           <Reveal>
             <SectionTitle
               surtitle="Nos univers"
-              title="Quatre façons de vivre le Nourable"
+              title="Quatre façons de vivre le Nourabel"
             />
           </Reveal>
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

@@ -80,8 +80,8 @@ export default function Chambres() {
   return (
     <>
       <Seo
-        title="Chambres & Suites — Nourable Hotel"
-        description="Chambres Standard, Supérieure et Suite Familiale au Nourable Hotel : climatisation, Wi-Fi, vue jardin ou mer, à partir de 45 000 FCFA la nuit."
+        title="Chambres & Suites — Nourabel Hotel"
+        description="Chambres Standard, Supérieure et Suite Familiale au Nourabel Hotel : climatisation, Wi-Fi, vue jardin ou mer, à partir de 45 000 FCFA la nuit."
       />
       <PageHero
         image={photos.facade}
@@ -96,7 +96,7 @@ export default function Chambres() {
             <SectionTitle
               surtitle="Nos hébergements"
               title="Choisissez votre cocon"
-              subtitle="Chaque chambre du Nourable a été pensée comme une parenthèse : matériaux naturels,
+              subtitle="Chaque chambre du Nourabel a été pensée comme une parenthèse : matériaux naturels,
               couleurs douces et confort moderne."
             />
           </Reveal>
@@ -151,7 +151,7 @@ export default function Chambres() {
       <section className="bg-lagune-600 py-20 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal>
-            <SectionTitle light surtitle="Toujours inclus" title="Les petits plus du Nourable" />
+            <SectionTitle light surtitle="Toujours inclus" title="Les petits plus du Nourabel" />
           </Reveal>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {services.map((s, i) => (
