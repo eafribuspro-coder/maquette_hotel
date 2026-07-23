@@ -1,28 +1,51 @@
-import { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { photos } from '../assets/images'
 import PageHero from '../components/PageHero'
+import Reveal from '../components/Reveal'
+import Seo from '../components/Seo'
 import SectionTitle from '../components/SectionTitle'
 
-type Categorie = 'Tout' | 'Restaurant' | 'Piscines' | 'Hôtel'
-
-const items: { image: string; legende: string; categorie: Exclude<Categorie, 'Tout'> }[] = [
-  { image: photos.restaurantPlage1, legende: 'Le restaurant, les pieds dans le sable', categorie: 'Restaurant' },
-  { image: photos.piscine1, legende: 'La Grande Piscine et ses parasols', categorie: 'Piscines' },
-  { image: photos.facade, legende: 'La façade corail du bâtiment principal', categorie: 'Hôtel' },
-  { image: photos.piscine2, legende: 'Le Bassin Lagune au petit matin', categorie: 'Piscines' },
-  { image: photos.restaurantPlage2, legende: 'La galerie du restaurant face à la mer', categorie: 'Restaurant' },
+const items = [
+  { image: photos.piscine1, legende: 'La grande piscine et ses parasols' },
+  { image: photos.restaurantPlage1, legende: 'Le restaurant, les pieds dans le sable' },
+  { image: photos.facade, legende: 'La façade corail du bâtiment principal' },
+  { image: photos.jeuxEnfants, legende: "L'aire de jeux aquatique des enfants" },
+  { image: photos.piscine2, legende: 'Le bassin en longueur au petit matin' },
+  { image: photos.restaurantPlage2, legende: 'La paillote du restaurant face à la mer' },
 ]
 
-const categories: Categorie[] = ['Tout', 'Restaurant', 'Piscines', 'Hôtel']
-
 export default function Galerie() {
-  const [filtre, setFiltre] = useState<Categorie>('Tout')
-  const [zoom, setZoom] = useState<(typeof items)[number] | null>(null)
+  const [index, setIndex] = useState<number | null>(null)
 
-  const visibles = filtre === 'Tout' ? items : items.filter((i) => i.categorie === filtre)
+  const fermer = useCallback(() => setIndex(null), [])
+  const precedent = useCallback(
+    () => setIndex((i) => (i === null ? null : (i - 1 + items.length) % items.length)),
+    [],
+  )
+  const suivant = useCallback(
+    () => setIndex((i) => (i === null ? null : (i + 1) % items.length)),
+    [],
+  )
+
+  // Navigation au clavier dans la lightbox
+  useEffect(() => {
+    if (index === null) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') fermer()
+      if (e.key === 'ArrowLeft') precedent()
+      if (e.key === 'ArrowRight') suivant()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [index, fermer, precedent, suivant])
 
   return (
     <>
+      <Seo
+        title="Galerie photos — Nourable Hotel"
+        description="Découvrez le Nourable Hotel en images : piscines turquoise, restaurant de plage, façade corail, aire de jeux aquatique et plage privée."
+      />
       <PageHero
         image={photos.restaurantPlage2}
         surtitle="En images"
@@ -30,71 +53,91 @@ export default function Galerie() {
         subtitle="Plongez dans l'univers du Nourable, entre corail, terracotta et turquoise."
       />
 
-      <section className="bg-sable-100 py-24">
+      <section className="bg-sable-100 py-24 sm:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionTitle surtitle="Nos plus beaux instants" title="L'hôtel en photos" />
+          <Reveal>
+            <SectionTitle surtitle="Nos plus beaux instants" title="L'hôtel en photos" />
+          </Reveal>
 
-          {/* Filtres */}
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                type="button"
-                onClick={() => setFiltre(cat)}
-                className={`rounded-full px-6 py-2.5 text-sm font-semibold transition-colors ${
-                  filtre === cat
-                    ? 'bg-terracotta-500 text-white shadow-md'
-                    : 'bg-white text-encre-700 hover:bg-corail-100'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-
-          {/* Mosaïque */}
-          <div className="mt-12 columns-1 gap-6 sm:columns-2 lg:columns-3 [&>figure]:mb-6">
-            {visibles.map((item) => (
-              <figure
-                key={item.legende}
-                className="group cursor-zoom-in break-inside-avoid overflow-hidden rounded-2xl shadow-lg"
-                onClick={() => setZoom(item)}
-              >
-                <img
-                  src={item.image}
-                  alt={item.legende}
-                  className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <figcaption className="bg-white px-5 py-4">
-                  <p className="text-sm font-medium text-encre-900">{item.legende}</p>
-                  <p className="mt-0.5 text-xs uppercase tracking-wider text-terracotta-500">
-                    {item.categorie}
-                  </p>
-                </figcaption>
-              </figure>
+          {/* Grille masonry */}
+          <div className="mt-14 columns-1 gap-5 sm:columns-2 lg:columns-3 [&>div]:mb-5">
+            {items.map((item, i) => (
+              <Reveal key={item.legende} delay={(i % 3) * 80}>
+                <figure
+                  className="group cursor-zoom-in break-inside-avoid overflow-hidden rounded-2xl shadow-lg"
+                  onClick={() => setIndex(i)}
+                >
+                  <div className="overflow-hidden">
+                    <img
+                      src={item.image}
+                      alt={item.legende}
+                      loading="lazy"
+                      className={`w-full object-cover transition-transform duration-700 group-hover:scale-105 ${
+                        i % 3 === 1 ? 'aspect-[3/4]' : 'aspect-[4/3]'
+                      }`}
+                    />
+                  </div>
+                  <figcaption className="bg-white px-5 py-4 text-sm font-medium text-encre-900">
+                    {item.legende}
+                  </figcaption>
+                </figure>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Visionneuse plein écran */}
-      {zoom && (
+      {/* Lightbox */}
+      {index !== null && (
         <div
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-encre-900/90 p-4"
-          onClick={() => setZoom(null)}
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-encre-900/95 p-4"
           role="dialog"
-          aria-label={zoom.legende}
+          aria-label={items[index].legende}
+          onClick={fermer}
         >
           <button
             type="button"
-            aria-label="Fermer"
-            className="absolute right-6 top-6 text-4xl leading-none text-white/80 hover:text-white"
+            aria-label="Fermer la visionneuse"
+            onClick={fermer}
+            className="absolute right-5 top-5 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/25"
           >
-            ×
+            <X className="h-6 w-6" />
           </button>
-          <figure className="max-h-full max-w-5xl">
-            <img src={zoom.image} alt={zoom.legende} className="max-h-[80vh] w-full rounded-xl object-contain" />
-            <figcaption className="mt-4 text-center text-sm text-white/85">{zoom.legende}</figcaption>
+          <button
+            type="button"
+            aria-label="Photo précédente"
+            onClick={(e) => {
+              e.stopPropagation()
+              precedent()
+            }}
+            className="absolute left-3 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/25 sm:left-6"
+          >
+            <ChevronLeft className="h-7 w-7" />
+          </button>
+          <button
+            type="button"
+            aria-label="Photo suivante"
+            onClick={(e) => {
+              e.stopPropagation()
+              suivant()
+            }}
+            className="absolute right-3 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/25 sm:right-6"
+          >
+            <ChevronRight className="h-7 w-7" />
+          </button>
+
+          <figure className="max-h-full max-w-5xl" onClick={(e) => e.stopPropagation()}>
+            <img
+              src={items[index].image}
+              alt={items[index].legende}
+              className="max-h-[78vh] w-full rounded-xl object-contain"
+            />
+            <figcaption className="mt-4 text-center text-sm text-white/85">
+              {items[index].legende}
+              <span className="ml-3 text-white/50">
+                {index + 1} / {items.length}
+              </span>
+            </figcaption>
           </figure>
         </div>
       )}

@@ -59,11 +59,11 @@ export default function Header() {
               key={item.to}
               to={item.to}
               className={({ isActive }) =>
-                `text-sm font-medium uppercase tracking-wide transition-colors ${
+                `link-underline whitespace-nowrap text-[13px] font-medium uppercase tracking-[0.15em] transition-colors ${
                   isActive
                     ? solid
                       ? 'text-terracotta-500'
-                      : 'text-corail-200 underline underline-offset-8'
+                      : 'text-or-300'
                     : solid
                       ? 'text-encre-700 hover:text-terracotta-500'
                       : 'text-white/90 hover:text-white'
@@ -102,7 +102,7 @@ export default function Header() {
 
           <Link
             to="/contact"
-            className="hidden rounded-full bg-corail-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg transition-colors hover:bg-corail-600 sm:inline-block"
+            className="hidden rounded-full bg-corail-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-corail-600 hover:shadow-xl sm:inline-block"
           >
             Réserver maintenant
           </Link>

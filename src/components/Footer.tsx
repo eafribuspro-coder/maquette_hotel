@@ -29,12 +29,14 @@ const socials = [
 export default function Footer() {
   return (
     <footer className="bg-encre-900 text-sable-200">
-      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+      {/* Filet doré signature */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-or-400/60 to-transparent" />
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Marque */}
           <div>
             <p className="font-display text-2xl font-bold tracking-widest text-white">NOURABLE</p>
-            <p className="mt-1 text-xs uppercase tracking-[0.3em] text-corail-300">
+            <p className="mt-1 text-xs uppercase tracking-[0.3em] text-or-300">
               Hôtel · Resort · Plage
             </p>
             <p className="mt-4 text-sm leading-relaxed text-sable-200/80">
