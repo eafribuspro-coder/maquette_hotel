@@ -70,7 +70,7 @@ export default function Loisirs() {
             <Reveal direction="right" className="lg:order-2">
               <img
                 src={photos.jeuxEnfants}
-                alt="Structure de jeux aquatiques avec toboggans jaune et turquoise pour enfants"
+                alt="Structure de jeux aquatiques avec toboggans bleu et orange pour enfants"
                 loading="lazy"
                 className="aspect-[4/3] w-full rounded-2xl object-cover shadow-2xl"
               />
