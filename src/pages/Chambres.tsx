@@ -1,7 +1,11 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Snowflake, Wifi, Tv, Trees, Waves, BedDouble, Users, Coffee } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { photos } from '../assets/images'
+import { listerChambres } from '../lib/db'
+import type { Chambre as ChambreDb } from '../lib/types'
+import { fcfa } from '../lib/format'
 import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
 import Seo from '../components/Seo'
@@ -12,62 +16,60 @@ interface Equipement {
   label: string
 }
 
-interface Chambre {
-  nom: string
+/**
+ * Habillage visuel des catégories : photo et équipements, associés par
+ * identifiant. Le nom, le tarif, la capacité et la description viennent de la
+ * configuration saisie par l'admin.
+ */
+interface Habillage {
   image: string
   alt: string
-  prix: string
-  description: string
   equipements: Equipement[]
 }
 
-const chambres: Chambre[] = [
-  {
-    nom: 'Chambre Standard',
+const equipementsCommuns: Equipement[] = [
+  { icone: Snowflake, label: 'Climatisation' },
+  { icone: Wifi, label: 'Wi-Fi gratuit' },
+]
+
+const habillages: Record<string, Habillage> = {
+  'ch-standard': {
     image: photos.facade,
     alt: 'Chambre Standard ouvrant sur les jardins de filaos',
-    prix: '45 000 FCFA',
-    description:
-      "Confortable et lumineuse, la chambre Standard donne sur les jardins de filaos. Idéale pour une escapade d'une nuit ou un court séjour.",
     equipements: [
       { icone: BedDouble, label: 'Lit double' },
-      { icone: Snowflake, label: 'Climatisation' },
-      { icone: Wifi, label: 'Wi-Fi gratuit' },
+      ...equipementsCommuns,
       { icone: Trees, label: 'Vue jardin' },
     ],
   },
-  {
-    nom: 'Chambre Supérieure',
+  'ch-superieure': {
     image: photos.piscine1,
     alt: 'Chambre Supérieure avec terrasse donnant sur la piscine',
-    prix: '65 000 FCFA',
-    description:
-      'Plus spacieuse, avec une terrasse privée ouverte sur la piscine et ses parasols. Parfaite pour un séjour détente en couple.',
     equipements: [
       { icone: BedDouble, label: 'Lit queen size' },
-      { icone: Snowflake, label: 'Climatisation' },
-      { icone: Wifi, label: 'Wi-Fi gratuit' },
+      ...equipementsCommuns,
       { icone: Tv, label: 'TV écran plat' },
       { icone: Waves, label: 'Vue piscine' },
     ],
   },
-  {
-    nom: 'Suite Familiale',
+  'ch-suite': {
     image: photos.restaurantPlage2,
     alt: 'Suite Familiale à quelques pas de la plage',
-    prix: '95 000 FCFA',
-    description:
-      "Deux chambres communicantes et un salon, à quelques pas du sable. Le choix des familles qui veulent vivre l'océan du lever au coucher du soleil.",
     equipements: [
-      { icone: Users, label: 'Jusqu’à 5 personnes' },
-      { icone: Snowflake, label: 'Climatisation' },
-      { icone: Wifi, label: 'Wi-Fi gratuit' },
+      ...equipementsCommuns,
       { icone: Tv, label: 'TV écran plat' },
       { icone: Waves, label: 'Vue mer' },
       { icone: Coffee, label: 'Petit-déjeuner inclus' },
     ],
   },
-]
+}
+
+/** Habillage de repli pour une catégorie créée depuis l'espace admin. */
+const habillageDefaut: Habillage = {
+  image: photos.facade,
+  alt: "Chambre du Nourabel Hotel",
+  equipements: [{ icone: BedDouble, label: 'Lit double' }, ...equipementsCommuns],
+}
 
 const services = [
   { titre: 'Petit-déjeuner', texte: 'Buffet servi face à la mer de 6h30 à 10h30.' },
@@ -77,6 +79,15 @@ const services = [
 ]
 
 export default function Chambres() {
+  const [chambres, setChambres] = useState<ChambreDb[]>([])
+  const [chargement, setChargement] = useState(true)
+
+  useEffect(() => {
+    listerChambres()
+      .then((liste) => setChambres(liste.filter((c) => c.active)))
+      .finally(() => setChargement(false))
+  }, [])
+
   return (
     <>
       <Seo
@@ -101,49 +112,62 @@ export default function Chambres() {
             />
           </Reveal>
 
-          <div className="mt-16 grid gap-8 lg:grid-cols-3">
-            {chambres.map((chambre, i) => (
-              <Reveal key={chambre.nom} delay={i * 120} className="h-full">
-                <article className="flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-lg transition-shadow hover:shadow-2xl">
-                  <div className="overflow-hidden">
-                    <img
-                      src={chambre.image}
-                      alt={chambre.alt}
-                      loading="lazy"
-                      className="aspect-[4/3] w-full object-cover transition-transform duration-700 hover:scale-110"
-                    />
-                  </div>
-                  <div className="flex flex-1 flex-col p-7">
-                    <div className="flex items-baseline justify-between gap-3">
-                      <h3 className="font-display text-2xl font-bold text-encre-900">
-                        {chambre.nom}
-                      </h3>
-                    </div>
-                    <p className="mt-1 text-sm font-semibold uppercase tracking-wider text-terracotta-500">
-                      dès {chambre.prix} <span className="font-normal lowercase text-encre-500">/ nuit</span>
-                    </p>
-                    <p className="mt-4 flex-1 text-sm leading-relaxed text-encre-500">
-                      {chambre.description}
-                    </p>
-                    <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-3">
-                      {chambre.equipements.map((eq) => (
-                        <li key={eq.label} className="flex items-center gap-2 text-xs text-encre-700">
-                          <eq.icone className="h-4 w-4 shrink-0 text-lagune-600" />
-                          {eq.label}
-                        </li>
-                      ))}
-                    </ul>
-                    <Link
-                      to="/contact"
-                      className="mt-8 block rounded-full bg-corail-500 py-3 text-center text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-corail-600"
-                    >
-                      Réserver
-                    </Link>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
-          </div>
+          {chargement ? (
+            <p className="mt-16 text-center text-sm text-encre-500">Chargement de nos chambres…</p>
+          ) : (
+            <div className="mt-16 grid gap-8 lg:grid-cols-3">
+              {chambres.map((chambre, i) => {
+                const habillage = habillages[chambre.id] ?? habillageDefaut
+                const equipements = [
+                  { icone: Users, label: `Jusqu'à ${chambre.capacite} personnes` },
+                  ...habillage.equipements,
+                ]
+                return (
+                  <Reveal key={chambre.id} delay={i * 120} className="h-full">
+                    <article className="flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-lg transition-shadow hover:shadow-2xl">
+                      <div className="overflow-hidden">
+                        <img
+                          src={habillage.image}
+                          alt={habillage.alt}
+                          loading="lazy"
+                          className="aspect-[4/3] w-full object-cover transition-transform duration-700 hover:scale-110"
+                        />
+                      </div>
+                      <div className="flex flex-1 flex-col p-7">
+                        <h3 className="font-display text-2xl font-bold text-encre-900">
+                          {chambre.nom}
+                        </h3>
+                        <p className="mt-1 text-sm font-semibold uppercase tracking-wider text-terracotta-500">
+                          dès {fcfa(chambre.prix)}{' '}
+                          <span className="font-normal lowercase text-encre-500">/ nuit</span>
+                        </p>
+                        <p className="mt-4 flex-1 text-sm leading-relaxed text-encre-500">
+                          {chambre.description}
+                        </p>
+                        <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-3">
+                          {equipements.map((eq) => (
+                            <li
+                              key={eq.label}
+                              className="flex items-center gap-2 text-xs text-encre-700"
+                            >
+                              <eq.icone className="h-4 w-4 shrink-0 text-lagune-600" />
+                              {eq.label}
+                            </li>
+                          ))}
+                        </ul>
+                        <Link
+                          to={`/reserver/chambre?chambre=${chambre.id}`}
+                          className="mt-8 block rounded-full bg-corail-500 py-3 text-center text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-corail-600"
+                        >
+                          Réserver
+                        </Link>
+                      </div>
+                    </article>
+                  </Reveal>
+                )
+              })}
+            </div>
+          )}
         </div>
       </section>
 

@@ -13,6 +13,7 @@ const navItems = [
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [reserverOpen, setReserverOpen] = useState(false)
   const [lang, setLang] = useState<'FR' | 'EN'>('FR')
   const { pathname } = useLocation()
 
@@ -23,7 +24,10 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  useEffect(() => setMenuOpen(false), [pathname])
+  useEffect(() => {
+    setMenuOpen(false)
+    setReserverOpen(false)
+  }, [pathname])
 
   // Sur la page d'accueil le header est transparent au-dessus du hero
   const solid = scrolled || menuOpen || pathname !== '/'
@@ -34,7 +38,7 @@ export default function Header() {
         solid ? 'bg-sable-100/95 shadow-md backdrop-blur' : 'bg-transparent'
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
         <Link to="/" className="group flex items-baseline gap-2">
           <span
             className={`font-display text-2xl font-bold tracking-widest transition-colors ${
@@ -44,7 +48,7 @@ export default function Header() {
             NOURABEL
           </span>
           <span
-            className={`hidden text-xs font-medium uppercase tracking-[0.3em] sm:inline ${
+            className={`hidden text-xs font-medium uppercase tracking-[0.3em] sm:inline lg:hidden 2xl:inline ${
               solid ? 'text-terracotta-500' : 'text-corail-200'
             }`}
           >
@@ -53,7 +57,7 @@ export default function Header() {
         </Link>
 
         {/* Navigation bureau */}
-        <nav className="hidden items-center gap-6 lg:flex">
+        <nav className="hidden items-center gap-5 xl:flex 2xl:gap-6">
           {navItems.map((item) => (
             <NavLink
               key={item.to}
@@ -100,19 +104,51 @@ export default function Header() {
             ))}
           </div>
 
-          <Link
-            to="/contact"
-            className="hidden rounded-full bg-corail-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-corail-600 hover:shadow-xl sm:inline-block"
+          {/* Réserver : chambre ou table */}
+          <div
+            className="relative hidden sm:block"
+            onMouseEnter={() => setReserverOpen(true)}
+            onMouseLeave={() => setReserverOpen(false)}
           >
-            Réserver maintenant
-          </Link>
+            <button
+              type="button"
+              onClick={() => setReserverOpen((o) => !o)}
+              className="rounded-full bg-corail-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-corail-600 hover:shadow-xl"
+            >
+              Réserver maintenant
+            </button>
+            {reserverOpen && (
+              <div className="absolute right-0 top-full w-56 pt-2">
+                <div className="overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-encre-900/5">
+                  <Link
+                    to="/reserver/chambre"
+                    className="block px-5 py-3.5 text-sm font-medium text-encre-700 transition-colors hover:bg-corail-100 hover:text-corail-700"
+                  >
+                    Une chambre
+                    <span className="mt-0.5 block text-xs font-normal text-encre-500">
+                      Séjour à l'hôtel
+                    </span>
+                  </Link>
+                  <Link
+                    to="/reserver/table"
+                    className="block border-t border-encre-700/10 px-5 py-3.5 text-sm font-medium text-encre-700 transition-colors hover:bg-corail-100 hover:text-corail-700"
+                  >
+                    Une table
+                    <span className="mt-0.5 block text-xs font-normal text-encre-500">
+                      Restaurant-Bar
+                    </span>
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
 
           {/* Bouton menu mobile */}
           <button
             type="button"
             aria-label="Ouvrir le menu"
             onClick={() => setMenuOpen((o) => !o)}
-            className={`flex h-10 w-10 flex-col items-center justify-center gap-1.5 lg:hidden ${
+            className={`flex h-10 w-10 flex-col items-center justify-center gap-1.5 xl:hidden ${
               solid ? 'text-encre-900' : 'text-white'
             }`}
           >
@@ -129,7 +165,7 @@ export default function Header() {
 
       {/* Menu mobile */}
       {menuOpen && (
-        <nav className="border-t border-encre-700/10 bg-sable-100 px-4 pb-6 pt-2 lg:hidden">
+        <nav className="border-t border-encre-700/10 bg-sable-100 px-4 pb-6 pt-2 xl:hidden">
           {navItems.map((item) => (
             <NavLink
               key={item.to}
@@ -144,10 +180,16 @@ export default function Header() {
             </NavLink>
           ))}
           <Link
-            to="/contact"
+            to="/reserver/chambre"
             className="mt-4 block rounded-full bg-corail-500 px-5 py-3 text-center text-sm font-semibold text-white"
           >
-            Réserver maintenant
+            Réserver une chambre
+          </Link>
+          <Link
+            to="/reserver/table"
+            className="mt-3 block rounded-full border border-corail-500 px-5 py-3 text-center text-sm font-semibold text-corail-600"
+          >
+            Réserver une table
           </Link>
         </nav>
       )}
