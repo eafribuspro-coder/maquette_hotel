@@ -39,6 +39,41 @@ export const diagnosticSupabase = {
   debutCle: supabaseKey ? supabaseKey.slice(0, 6) : null,
 }
 
+/**
+ * Teste en direct la connexion à Supabase et renvoie un texte lisible.
+ * Deux essais : via le client supabase-js, puis via un fetch brut avec la clé,
+ * pour distinguer un problème de client d'un problème de clé/projet.
+ */
+export async function testerConnexionSupabase(): Promise<string> {
+  if (!supabase || !supabaseUrl || !supabaseKey) {
+    return 'Client Supabase non initialisé (mode démonstration).'
+  }
+  const lignes: string[] = []
+
+  try {
+    const { data, error } = await supabase.from('chambres').select('id').limit(1)
+    lignes.push(
+      error
+        ? `supabase-js : ERREUR — ${error.message}`
+        : `supabase-js : OK (${data?.length ?? 0} ligne reçue)`,
+    )
+  } catch (e) {
+    lignes.push(`supabase-js : exception — ${String(e)}`)
+  }
+
+  try {
+    const res = await fetch(`${supabaseUrl}/rest/v1/chambres?select=id&limit=1`, {
+      headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` },
+    })
+    const txt = await res.text()
+    lignes.push(`fetch brut : HTTP ${res.status} — ${txt.slice(0, 160)}`)
+  } catch (e) {
+    lignes.push(`fetch brut : exception — ${String(e)}`)
+  }
+
+  return lignes.join('\n')
+}
+
 /* ------------------------------------------------------------------ */
 /* Mode démo : localStorage                                            */
 /* ------------------------------------------------------------------ */
