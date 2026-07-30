@@ -2,7 +2,7 @@ import { useState, type FormEvent } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { Loader2, Lock } from 'lucide-react'
 import { useAuth, modeDemo, IDENTIFIANTS_DEMO } from '../../lib/auth'
-import { diagnosticSupabase } from '../../lib/db'
+import { diagnosticSupabase, testerConnexionSupabase } from '../../lib/db'
 import { logo } from '../../assets/images'
 import Seo from '../../components/Seo'
 import { classesChamp } from '../../components/Champ'
@@ -12,6 +12,19 @@ export default function Connexion() {
   const navigate = useNavigate()
   const [envoi, setEnvoi] = useState(false)
   const [erreur, setErreur] = useState<string | null>(null)
+  const [test, setTest] = useState<string | null>(null)
+  const [testEnCours, setTestEnCours] = useState(false)
+
+  const lancerTest = async () => {
+    setTestEnCours(true)
+    setTest('Test en cours…')
+    try {
+      setTest(await testerConnexionSupabase())
+    } catch (e) {
+      setTest(`Exception : ${String(e)}`)
+    }
+    setTestEnCours(false)
+  }
 
   if (connecte) return <Navigate to="/admin" replace />
 
@@ -114,6 +127,19 @@ export default function Connexion() {
               Clé définie : {diagnosticSupabase.cleDefinie ? 'oui' : 'NON'} · longueur{' '}
               {diagnosticSupabase.longueurCle} · début {diagnosticSupabase.debutCle ?? '—'}
             </p>
+            <button
+              type="button"
+              onClick={lancerTest}
+              disabled={testEnCours}
+              className="mt-3 rounded-lg bg-or-300/20 px-3 py-1.5 text-[11px] font-semibold text-or-300 hover:bg-or-300/30 disabled:opacity-50"
+            >
+              Tester la connexion
+            </button>
+            {test && (
+              <pre className="mt-3 max-h-40 overflow-auto whitespace-pre-wrap break-words rounded-lg bg-encre-900/60 px-3 py-2 text-[10px] text-sable-200/90">
+                {test}
+              </pre>
+            )}
           </div>
 
           <p className="mt-6 text-center text-sm">
