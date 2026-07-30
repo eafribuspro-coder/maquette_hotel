@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { photos } from '../assets/images'
 import HeroSlider from '../components/HeroSlider'
-import BookingBar from '../components/BookingBar'
 import CountUp from '../components/CountUp'
 import Reveal from '../components/Reveal'
 import Seo from '../components/Seo'
@@ -88,10 +87,7 @@ export default function Accueil() {
         </div>
       </section>
 
-      {/* 2. BARRE DE RÉSERVATION superposée */}
-      <BookingBar />
-
-      {/* 3. PRÉSENTATION */}
+      {/* 2. PRÉSENTATION */}
       <section className="bg-sable-100 py-24 sm:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
