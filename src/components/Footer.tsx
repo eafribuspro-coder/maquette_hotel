@@ -37,7 +37,9 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Marque */}
           <div>
-            <p className="font-display text-2xl font-bold tracking-widest text-white">NOURABEL</p>
+            <p translate="no" className="notranslate font-display text-2xl font-bold tracking-widest text-white">
+              NOURABEL
+            </p>
             <p className="mt-1 text-xs uppercase tracking-[0.3em] text-or-300">
               Hôtel · Resort · Plage
             </p>

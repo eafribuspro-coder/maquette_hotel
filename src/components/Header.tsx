@@ -41,7 +41,9 @@ export default function Header() {
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
         <Link to="/" className="group flex items-baseline gap-2">
           <span
-            className={`font-display text-2xl font-bold tracking-widest transition-colors ${
+            /* Nom de marque : jamais traduit par le navigateur */
+            translate="no"
+            className={`notranslate font-display text-2xl font-bold tracking-widest transition-colors ${
               solid ? 'text-encre-900' : 'text-white'
             }`}
           >
@@ -90,8 +92,11 @@ export default function Header() {
               <button
                 key={l}
                 type="button"
+                /* Codes de langue : jamais traduits par le navigateur */
+                translate="no"
+                lang="en"
                 onClick={() => setLang(l)}
-                className={`px-3 py-1.5 transition-colors ${
+                className={`notranslate px-3 py-1.5 transition-colors ${
                   lang === l
                     ? 'bg-terracotta-500 text-white'
                     : solid
