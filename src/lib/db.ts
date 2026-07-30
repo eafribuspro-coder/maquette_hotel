@@ -17,11 +17,16 @@ import type {
   StatutReservation,
 } from './types'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined
+const supabaseUrl = (import.meta.env.VITE_SUPABASE_URL as string | undefined)?.trim()
+const supabaseKey = (import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined)?.trim()
 
 export const supabase: SupabaseClient | null =
-  supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null
+  supabaseUrl && supabaseKey
+    ? createClient(supabaseUrl, supabaseKey, {
+        global: { headers: { apikey: supabaseKey } },
+        auth: { persistSession: true, autoRefreshToken: true },
+      })
+    : null
 
 export const modeDemo = supabase === null
 
