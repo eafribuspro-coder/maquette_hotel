@@ -1,15 +1,24 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { CalendarDays, Minus, Plus, Users } from 'lucide-react'
 
-/** Barre de réservation superposée au bas du hero. Visuel uniquement, sans backend. */
+/** Barre de réservation superposée au bas du hero : pré-remplit la page de réservation. */
 export default function BookingBar() {
+  const navigate = useNavigate()
   const today = new Date().toISOString().slice(0, 10)
   const [arrivee, setArrivee] = useState('')
   const [depart, setDepart] = useState('')
   const [adultes, setAdultes] = useState(2)
   const [enfants, setEnfants] = useState(0)
   const [guestsOpen, setGuestsOpen] = useState(false)
+
+  const rechercher = () => {
+    const params = new URLSearchParams()
+    if (arrivee) params.set('arrivee', arrivee)
+    if (depart) params.set('depart', depart)
+    params.set('voyageurs', String(adultes + enfants))
+    navigate(`/reserver/chambre?${params.toString()}`)
+  }
 
   const compteur = (
     label: string,
@@ -97,12 +106,13 @@ export default function BookingBar() {
           )}
         </div>
 
-        <Link
-          to="/contact"
+        <button
+          type="button"
+          onClick={rechercher}
           className="rounded-xl bg-corail-500 px-8 py-3.5 text-center text-sm font-semibold uppercase tracking-wide text-white shadow-lg transition-colors hover:bg-corail-600"
         >
           Réserver maintenant
-        </Link>
+        </button>
       </div>
     </div>
   )

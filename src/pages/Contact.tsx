@@ -1,5 +1,7 @@
 import { useState, type FormEvent } from 'react'
+import { Link } from 'react-router-dom'
 import { MapPin, Phone, Mail, Clock } from 'lucide-react'
+import { etablissement } from '../lib/etablissement'
 import { photos } from '../assets/images'
 import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
@@ -109,21 +111,34 @@ export default function Contact() {
                   <li className="flex gap-3">
                     <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-corail-300" />
                     <span className="text-sable-200/85">
-                      Bord de mer, Route de la plage
+                      {etablissement.adresse.rue}
                       <br />
-                      Jacqueville, Côte d'Ivoire
+                      {etablissement.adresse.quartier} — {etablissement.adresse.ville}
+                      <br />
+                      {etablissement.adresse.boitePostale}
                     </span>
                   </li>
                   <li className="flex gap-3">
                     <Phone className="mt-0.5 h-5 w-5 shrink-0 text-corail-300" />
-                    <a href="tel:+2250700000000" className="text-sable-200/85 hover:text-white">
-                      +225 07 00 00 00 00
-                    </a>
+                    <span>
+                      {etablissement.telephones.map((tel) => (
+                        <a
+                          key={tel}
+                          href={`tel:${tel.replace(/\s/g, '')}`}
+                          className="block text-sable-200/85 hover:text-white"
+                        >
+                          {tel}
+                        </a>
+                      ))}
+                    </span>
                   </li>
                   <li className="flex gap-3">
                     <Mail className="mt-0.5 h-5 w-5 shrink-0 text-corail-300" />
-                    <a href="mailto:contact@nourabelhotel.ci" className="text-sable-200/85 hover:text-white">
-                      contact@nourabelhotel.ci
+                    <a
+                      href={`mailto:${etablissement.email}`}
+                      className="text-sable-200/85 hover:text-white"
+                    >
+                      {etablissement.email}
                     </a>
                   </li>
                   <li className="flex gap-3">
@@ -131,13 +146,28 @@ export default function Contact() {
                     <span className="text-sable-200/85">Réception ouverte 24h/24, 7j/7</span>
                   </li>
                 </ul>
+
+                <div className="mt-7 flex flex-wrap gap-3 border-t border-white/10 pt-6">
+                  <Link
+                    to="/reserver/chambre"
+                    className="rounded-full bg-corail-500 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-corail-600"
+                  >
+                    Réserver une chambre
+                  </Link>
+                  <Link
+                    to="/reserver/table"
+                    className="rounded-full border border-white/25 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+                  >
+                    Réserver une table
+                  </Link>
+                </div>
               </div>
 
-              {/* Carte Google Maps (Abidjan / littoral) */}
+              {/* Plan d'accès */}
               <div className="mt-8 overflow-hidden rounded-2xl shadow-lg">
                 <iframe
                   title="Plan d'accès au Nourabel Hotel"
-                  src="https://www.google.com/maps?q=Jacqueville,+C%C3%B4te+d'Ivoire&z=11&output=embed"
+                  src={`https://www.google.com/maps?q=${etablissement.requeteCarte}&z=14&output=embed`}
                   className="h-72 w-full border-0"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"

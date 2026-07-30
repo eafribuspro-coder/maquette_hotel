@@ -130,7 +130,7 @@ export default function Loisirs() {
           </div>
           <Reveal className="mt-14 text-center">
             <Link
-              to="/contact"
+              to="/reserver/chambre"
               className="inline-block rounded-full bg-corail-500 px-9 py-4 text-sm font-semibold uppercase tracking-wide text-white shadow-lg transition-colors hover:bg-corail-600"
             >
               Réserver maintenant

@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom'
+import { etablissement } from '../lib/etablissement'
 
 const quickLinks = [
   { to: '/chambres', label: 'Nos chambres' },
   { to: '/restaurant', label: 'Restaurant & Bar' },
   { to: '/loisirs', label: 'Piscines & Loisirs' },
   { to: '/galerie', label: 'Galerie photos' },
-  { to: '/contact', label: 'Contact & Réservation' },
+  { to: '/reserver/chambre', label: 'Réserver une chambre' },
+  { to: '/reserver/table', label: 'Réserver une table' },
 ]
 
 const socials = [
@@ -84,16 +86,21 @@ export default function Footer() {
               Coordonnées
             </h3>
             <ul className="mt-4 space-y-2.5 text-sm text-sable-200/80">
-              <li>Bord de mer, Route de la plage</li>
-              <li>Jacqueville, Côte d'Ivoire</li>
+              <li>{etablissement.adresse.rue}</li>
               <li>
-                <a href="tel:+2250700000000" className="hover:text-corail-300">
-                  +225 07 00 00 00 00
-                </a>
+                {etablissement.adresse.quartier} — {etablissement.adresse.ville}
               </li>
+              <li>{etablissement.adresse.boitePostale}</li>
+              {etablissement.telephones.map((tel) => (
+                <li key={tel}>
+                  <a href={`tel:${tel.replace(/\s/g, '')}`} className="hover:text-corail-300">
+                    {tel}
+                  </a>
+                </li>
+              ))}
               <li>
-                <a href="mailto:contact@nourabelhotel.ci" className="hover:text-corail-300">
-                  contact@nourabelhotel.ci
+                <a href={`mailto:${etablissement.email}`} className="hover:text-corail-300">
+                  {etablissement.email}
                 </a>
               </li>
             </ul>
@@ -105,30 +112,45 @@ export default function Footer() {
               Réservation
             </h3>
             <p className="mt-4 text-sm leading-relaxed text-sable-200/80">
-              Réception ouverte 24h/24, 7j/7. Réservez votre séjour en quelques clics.
+              Réception ouverte 24h/24, 7j/7. Réservez votre séjour ou votre table en quelques
+              clics.
             </p>
             <Link
-              to="/contact"
+              to="/reserver/chambre"
               className="mt-5 inline-block rounded-full bg-corail-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-corail-600"
             >
-              Réserver maintenant
+              Réserver une chambre
+            </Link>
+            <Link
+              to="/reserver/table"
+              className="mt-3 inline-block rounded-full border border-white/25 px-6 py-3 text-sm font-semibold text-white transition-colors hover:border-corail-400 hover:bg-white/10"
+            >
+              Réserver une table
             </Link>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs text-sable-200/60 sm:flex-row">
-          <p>© 2026 Nourabel Hotel. Tous droits réservés.</p>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-corail-300">
-              Mentions légales
-            </a>
-            <a href="#" className="hover:text-corail-300">
-              Politique de confidentialité
-            </a>
-            <a href="#" className="hover:text-corail-300">
-              CGV
-            </a>
+        <div className="mt-12 border-t border-white/10 pt-6">
+          <div className="flex flex-col items-center justify-between gap-4 text-xs text-sable-200/60 sm:flex-row">
+            <p>© 2026 {etablissement.nom}. Tous droits réservés.</p>
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+              <a href="#" className="hover:text-corail-300">
+                Mentions légales
+              </a>
+              <a href="#" className="hover:text-corail-300">
+                Politique de confidentialité
+              </a>
+              <a href="#" className="hover:text-corail-300">
+                CGV
+              </a>
+              <Link to="/admin" className="hover:text-corail-300">
+                Espace admin
+              </Link>
+            </div>
           </div>
+          <p className="mt-4 text-center text-[11px] text-sable-200/40 sm:text-left">
+            RCCM : {etablissement.rccm} · {etablissement.site}
+          </p>
         </div>
       </div>
     </footer>
