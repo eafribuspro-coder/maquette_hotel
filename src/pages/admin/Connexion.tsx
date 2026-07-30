@@ -36,7 +36,11 @@ export default function Connexion() {
       <div className="flex min-h-screen items-center justify-center bg-encre-900 px-4 py-16">
         <div className="w-full max-w-md">
           <div className="text-center">
-            <Link to="/" className="font-display text-3xl font-bold tracking-widest text-white">
+            <Link
+              to="/"
+              translate="no"
+              className="notranslate font-display text-3xl font-bold tracking-widest text-white"
+            >
               NOURABEL
             </Link>
             <p className="mt-2 text-[11px] uppercase tracking-[0.4em] text-or-300">Espace admin</p>
