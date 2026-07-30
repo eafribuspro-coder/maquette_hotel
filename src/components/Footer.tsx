@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { logo } from '../assets/images'
 import { etablissement } from '../lib/etablissement'
 
 const quickLinks = [
@@ -37,12 +38,17 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Marque */}
           <div>
-            <p translate="no" className="notranslate font-display text-2xl font-bold tracking-widest text-white">
-              NOURABEL
-            </p>
-            <p className="mt-1 text-xs uppercase tracking-[0.3em] text-or-300">
-              Hôtel · Resort · Plage
-            </p>
+            <div className="flex items-center gap-3">
+              <img src={logo} alt="Nourabel" className="h-14 w-auto object-contain" />
+              <div>
+                <p translate="no" className="notranslate font-display text-2xl font-bold tracking-widest text-white">
+                  NOURABEL
+                </p>
+                <p className="mt-1 text-xs uppercase tracking-[0.3em] text-or-300">
+                  Hôtel · Resort · Plage
+                </p>
+              </div>
+            </div>
             <p className="mt-4 text-sm leading-relaxed text-sable-200/80">
               Un havre de paix les pieds dans le sable, entre cocotiers et océan Atlantique, en
               Côte d'Ivoire.

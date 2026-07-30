@@ -12,6 +12,7 @@ import {
   X,
 } from 'lucide-react'
 import { useAuth, modeDemo } from '../../lib/auth'
+import { logo } from '../../assets/images'
 
 const liens = [
   { to: '/admin', label: 'Tableau de bord', icone: LayoutDashboard, exact: true },
@@ -62,13 +63,16 @@ export default function AdminLayout() {
     <div className="flex min-h-screen bg-sable-100">
       {/* Barre latérale bureau */}
       <aside className="hidden w-72 shrink-0 flex-col bg-encre-900 p-6 lg:flex">
-        <Link to="/" className="block">
-          <span translate="no" className="notranslate font-display text-xl font-bold tracking-widest text-white">
-            NOURABEL
-          </span>
-          <span className="mt-1 block text-[10px] uppercase tracking-[0.3em] text-or-300">
-            Espace admin
-          </span>
+        <Link to="/" className="flex items-center gap-3">
+          <img src={logo} alt="Nourabel" className="h-11 w-auto object-contain" />
+          <div>
+            <span translate="no" className="notranslate font-display text-xl font-bold tracking-widest text-white">
+              NOURABEL
+            </span>
+            <span className="mt-1 block text-[10px] uppercase tracking-[0.3em] text-or-300">
+              Espace admin
+            </span>
+          </div>
         </Link>
         <div className="mt-8 flex-1">{navigation}</div>
         <div className="border-t border-white/10 pt-5">
@@ -87,12 +91,11 @@ export default function AdminLayout() {
       <div className="flex min-w-0 flex-1 flex-col">
         {/* Barre supérieure mobile */}
         <header className="flex items-center justify-between bg-encre-900 px-4 py-4 lg:hidden">
-          <Link
-            to="/admin"
-            translate="no"
-            className="notranslate font-display text-lg font-bold tracking-widest text-white"
-          >
-            NOURABEL
+          <Link to="/admin" className="flex items-center gap-2">
+            <img src={logo} alt="Nourabel" className="h-9 w-auto object-contain" />
+            <span translate="no" className="notranslate font-display text-lg font-bold tracking-widest text-white">
+              NOURABEL
+            </span>
           </Link>
           <button
             type="button"

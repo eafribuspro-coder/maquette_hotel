@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { Loader2, Lock } from 'lucide-react'
 import { useAuth, modeDemo, IDENTIFIANTS_DEMO } from '../../lib/auth'
+import { logo } from '../../assets/images'
 import Seo from '../../components/Seo'
 import { classesChamp } from '../../components/Champ'
 
@@ -35,13 +36,15 @@ export default function Connexion() {
       />
       <div className="flex min-h-screen items-center justify-center bg-encre-900 px-4 py-16">
         <div className="w-full max-w-md">
-          <div className="text-center">
-            <Link
-              to="/"
-              translate="no"
-              className="notranslate font-display text-3xl font-bold tracking-widest text-white"
-            >
-              NOURABEL
+          <div className="flex flex-col items-center">
+            <Link to="/" className="flex flex-col items-center gap-2">
+              <img src={logo} alt="Nourabel" className="h-16 w-auto object-contain" />
+              <span
+                translate="no"
+                className="notranslate font-display text-3xl font-bold tracking-widest text-white"
+              >
+                NOURABEL
+              </span>
             </Link>
             <p className="mt-2 text-[11px] uppercase tracking-[0.4em] text-or-300">Espace admin</p>
           </div>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
+import { logo } from '../assets/images'
 
 const navItems = [
   { to: '/', label: 'Accueil' },
@@ -39,23 +40,29 @@ export default function Header() {
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
-        <Link to="/" className="group flex items-baseline gap-2">
-          <span
-            /* Nom de marque : jamais traduit par le navigateur */
-            translate="no"
-            className={`notranslate font-display text-2xl font-bold tracking-widest transition-colors ${
-              solid ? 'text-encre-900' : 'text-white'
-            }`}
-          >
-            NOURABEL
-          </span>
-          <span
-            className={`hidden text-xs font-medium uppercase tracking-[0.3em] sm:inline lg:hidden 2xl:inline ${
-              solid ? 'text-terracotta-500' : 'text-corail-200'
-            }`}
-          >
-            Hôtel
-          </span>
+        <Link to="/" className="group flex items-center gap-3">
+          <img
+            src={logo}
+            alt="Nourabel"
+            className="h-12 w-auto object-contain"
+          />
+          <div className="flex flex-col">
+            <span
+              translate="no"
+              className={`notranslate font-display text-xl font-bold tracking-widest transition-colors sm:text-2xl ${
+                solid ? 'text-encre-900' : 'text-white'
+              }`}
+            >
+              NOURABEL
+            </span>
+            <span
+              className={`hidden text-[10px] font-medium uppercase tracking-[0.3em] sm:block ${
+                solid ? 'text-terracotta-500' : 'text-corail-200'
+              }`}
+            >
+              Hôtel · Resort · Plage
+            </span>
+          </div>
         </Link>
 
         {/* Navigation bureau */}
