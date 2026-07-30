@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { Loader2, Lock } from 'lucide-react'
 import { useAuth, modeDemo, IDENTIFIANTS_DEMO } from '../../lib/auth'
+import { diagnosticSupabase } from '../../lib/db'
 import { logo } from '../../assets/images'
 import Seo from '../../components/Seo'
 import { classesChamp } from '../../components/Champ'
@@ -103,6 +104,17 @@ export default function Connexion() {
               </p>
             )}
           </form>
+
+          {/* Panneau de diagnostic temporaire — à retirer une fois la connexion établie */}
+          <div className="mt-6 rounded-xl bg-encre-700/40 px-4 py-3 text-left text-[11px] leading-relaxed text-sable-200/90">
+            <p className="font-semibold text-or-300">Diagnostic configuration</p>
+            <p>Mode : {modeDemo ? 'DÉMO (Supabase non détecté)' : 'SUPABASE'}</p>
+            <p>URL définie : {diagnosticSupabase.urlDefinie ? `oui (${diagnosticSupabase.hoteUrl})` : 'NON'}</p>
+            <p>
+              Clé définie : {diagnosticSupabase.cleDefinie ? 'oui' : 'NON'} · longueur{' '}
+              {diagnosticSupabase.longueurCle} · début {diagnosticSupabase.debutCle ?? '—'}
+            </p>
+          </div>
 
           <p className="mt-6 text-center text-sm">
             <Link to="/" className="text-sable-200/70 hover:text-white">
