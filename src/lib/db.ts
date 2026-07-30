@@ -30,6 +30,15 @@ export const supabase: SupabaseClient | null =
 
 export const modeDemo = supabase === null
 
+/** Diagnostic de configuration (n'expose jamais la clé, seulement sa longueur). */
+export const diagnosticSupabase = {
+  urlDefinie: Boolean(supabaseUrl),
+  hoteUrl: supabaseUrl ? supabaseUrl.replace(/^https?:\/\//, '').split('.')[0] : null,
+  cleDefinie: Boolean(supabaseKey),
+  longueurCle: supabaseKey ? supabaseKey.length : 0,
+  debutCle: supabaseKey ? supabaseKey.slice(0, 6) : null,
+}
+
 /* ------------------------------------------------------------------ */
 /* Mode démo : localStorage                                            */
 /* ------------------------------------------------------------------ */
