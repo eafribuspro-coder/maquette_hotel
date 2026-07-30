@@ -3,12 +3,15 @@
  * Tout le site ne référence que l'objet `photos` : pour changer une image,
  * il suffit de remplacer le fichier ou l'import correspondant ici.
  */
+import logo from './photos/Logo_nourabel.jpeg'
 import restaurantPlage1 from './photos/restaurant-plage-1.jpeg'
 import piscine1 from './photos/piscine-1.jpeg'
 import piscine2 from './photos/piscine-2.jpeg'
 import piscine3 from './photos/piscine-3.jpeg'
 import facade from './photos/facade.jpeg'
 import jeuxEnfants from './photos/jeux-enfants.jpeg'
+
+export { logo }
 
 export const photos = {
   /** Restaurant de plage sous les cocotiers aux troncs orange */
