@@ -61,8 +61,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       email: mail.trim(),
       password: motDePasse,
     })
-    // Message brut de Supabase affiché temporairement pour diagnostiquer le login.
-    if (error) return { erreur: `${error.message} (code ${error.status ?? '?'})` }
+    if (error) return { erreur: 'Identifiants incorrects.' }
     return {}
   }
 

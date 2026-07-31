@@ -18,6 +18,7 @@ import ResaTables from './pages/admin/ResaTables'
 import Clients from './pages/admin/Clients'
 import ConfigChambres from './pages/admin/ConfigChambres'
 import ConfigTables from './pages/admin/ConfigTables'
+import Medias from './pages/admin/Medias'
 
 /** Gabarit du site public : en-tête, contenu, pied de page. */
 function SiteLayout() {
@@ -60,6 +61,7 @@ export default function App() {
           <Route path="clients" element={<Clients />} />
           <Route path="config-chambres" element={<ConfigChambres />} />
           <Route path="config-tables" element={<ConfigTables />} />
+          <Route path="medias" element={<Medias />} />
         </Route>
       </Routes>
     </>

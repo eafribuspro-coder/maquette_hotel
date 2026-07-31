@@ -1,12 +1,14 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { photos } from '../assets/images'
+import { listerPhotos } from '../lib/medias'
+import type { Media } from '../lib/types'
 import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
 import Seo from '../components/Seo'
 import SectionTitle from '../components/SectionTitle'
 
-const items = [
+const itemsStatiques = [
   { image: photos.piscine1, legende: 'La grande piscine et ses parasols' },
   { image: photos.restaurantPlage1, legende: 'Le restaurant, les pieds dans le sable' },
   { image: photos.facade, legende: 'La façade corail du bâtiment principal' },
@@ -17,15 +19,31 @@ const items = [
 
 export default function Galerie() {
   const [index, setIndex] = useState<number | null>(null)
+  const [photosAdmin, setPhotosAdmin] = useState<Media[]>([])
+
+  useEffect(() => {
+    listerPhotos()
+      .then(setPhotosAdmin)
+      .catch(() => setPhotosAdmin([]))
+  }, [])
+
+  // Les photos ajoutées par l'admin s'affichent en tête, suivies des photos du site.
+  const items = useMemo(
+    () => [
+      ...photosAdmin.map((p) => ({ image: p.url, legende: p.titre || 'Nourabel Hotel' })),
+      ...itemsStatiques,
+    ],
+    [photosAdmin],
+  )
 
   const fermer = useCallback(() => setIndex(null), [])
   const precedent = useCallback(
     () => setIndex((i) => (i === null ? null : (i - 1 + items.length) % items.length)),
-    [],
+    [items.length],
   )
   const suivant = useCallback(
     () => setIndex((i) => (i === null ? null : (i + 1) % items.length)),
-    [],
+    [items.length],
   )
 
   // Navigation au clavier dans la lightbox

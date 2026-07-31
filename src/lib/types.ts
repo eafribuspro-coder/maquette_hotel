@@ -51,6 +51,23 @@ export interface ReservationTable {
   creeLe: string
 }
 
+/** Médias gérés par l'admin et affichés sur le site public. */
+export type TypeMedia = 'film' | 'photo'
+
+export interface Media {
+  id: string
+  type: TypeMedia
+  /** URL publique (Supabase Storage) ou data URL (mode démo). */
+  url: string
+  /** Chemin dans le bucket de stockage, pour la suppression (vide en démo). */
+  chemin: string
+  /** Légende affichée sur le site (facultative). */
+  titre: string
+  /** Ordre d'affichage des photos. */
+  ordre: number
+  creeLe: string
+}
+
 /** Fiche client agrégée à partir des réservations. */
 export interface FicheClient {
   nom: string
