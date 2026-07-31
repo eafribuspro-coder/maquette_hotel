@@ -3,6 +3,7 @@ import { Link, NavLink, Navigate, Outlet } from 'react-router-dom'
 import {
   BedDouble,
   CalendarCheck,
+  Image,
   LayoutDashboard,
   LogOut,
   Menu,
@@ -19,6 +20,7 @@ const liens = [
   { to: '/admin/chambres', label: 'Réservations chambres', icone: BedDouble },
   { to: '/admin/tables', label: 'Réservations tables', icone: CalendarCheck },
   { to: '/admin/clients', label: 'Clients', icone: Users },
+  { to: '/admin/medias', label: 'Médias du site', icone: Image },
   { to: '/admin/config-chambres', label: 'Configurer les chambres', icone: Settings },
   { to: '/admin/config-tables', label: 'Configurer les tables', icone: Utensils },
 ]

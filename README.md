@@ -59,8 +59,22 @@ La barre de réservation de l'accueil pré-remplit dates et voyageurs.
 | `/admin/chambres` | Réservations de chambres — confirmer / annuler |
 | `/admin/tables` | Réservations de tables — confirmer / annuler |
 | `/admin/clients` | Fiches clients agrégées (réservations, dépenses, dernière visite) |
+| `/admin/medias` | Médias du site : film promotionnel (vidéo) et photos de la galerie |
 | `/admin/config-chambres` | Catégories de chambres : nom, tarif, capacité, quantité, visibilité |
 | `/admin/config-tables` | Plan de salle : tables, emplacements, places, disponibilité |
+
+### Médias (film & photos)
+
+L'admin peut téléverser un **film promotionnel** (affiché sur la page d'accueil)
+et des **photos** (affichées dans la galerie et l'aperçu de l'accueil) depuis
+`/admin/medias`.
+
+- **Mode Supabase** : les fichiers sont stockés dans le bucket `medias` et leurs
+  métadonnées dans la table `medias`. Exécutez **une fois** `supabase/medias.sql`
+  dans l'éditeur SQL du projet (crée la table, le bucket public et les politiques
+  de sécurité) après `supabase/schema.sql`.
+- **Mode démonstration** : les médias sont enregistrés dans le navigateur ; les
+  vidéos volumineuses peuvent dépasser le quota du `localStorage`.
 
 ### Deux modes de fonctionnement
 

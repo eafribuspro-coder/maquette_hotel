@@ -1,5 +1,8 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { photos } from '../assets/images'
+import { listerPhotos, obtenirFilm } from '../lib/medias'
+import type { Media } from '../lib/types'
 import HeroSlider from '../components/HeroSlider'
 import CountUp from '../components/CountUp'
 import Reveal from '../components/Reveal'
@@ -37,7 +40,7 @@ const cartes = [
   },
 ]
 
-const apercuGalerie = [
+const apercuGalerieStatique = [
   { image: photos.piscine1, alt: 'Grande piscine et parasols' },
   { image: photos.restaurantPlage1, alt: 'Restaurant de plage, vue rapprochée' },
   { image: photos.facade, alt: 'Façade rose du bâtiment principal' },
@@ -49,6 +52,23 @@ const apercuGalerie = [
 ]
 
 export default function Accueil() {
+  const [film, setFilm] = useState<Media | null>(null)
+  const [photosAdmin, setPhotosAdmin] = useState<Media[]>([])
+
+  useEffect(() => {
+    obtenirFilm()
+      .then(setFilm)
+      .catch(() => setFilm(null))
+    listerPhotos()
+      .then(setPhotosAdmin)
+      .catch(() => setPhotosAdmin([]))
+  }, [])
+
+  // Aperçu galerie : les photos ajoutées par l'admin priment, sinon les photos du site.
+  const apercuGalerie = photosAdmin.length
+    ? photosAdmin.slice(0, 8).map((p) => ({ image: p.url, alt: p.titre || 'Nourabel Hotel' }))
+    : apercuGalerieStatique
+
   return (
     <>
       <Seo
@@ -155,6 +175,32 @@ export default function Accueil() {
           </Reveal>
         </div>
       </section>
+
+      {/* 3. FILM PROMOTIONNEL — affiché seulement si l'admin en a ajouté un */}
+      {film && (
+        <section className="bg-encre-900 py-24 sm:py-28">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+            <Reveal>
+              <SectionTitle
+                light
+                surtitle="En vidéo"
+                title="Découvrez le Nourabel en images"
+              />
+            </Reveal>
+            <Reveal className="mt-14">
+              <div className="overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/10">
+                <video
+                  src={film.url}
+                  controls
+                  playsInline
+                  preload="metadata"
+                  className="aspect-video w-full bg-black"
+                />
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      )}
 
       {/* 4. GRILLE 4 CARTES */}
       <section className="bg-sable-200 py-24 sm:py-28">
